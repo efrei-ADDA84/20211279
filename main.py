@@ -11,6 +11,7 @@ def get_current_weather():
     lon = config.LONG
     api_key = config.API_KEY
     weather_data = get_weather(api_key, lat, lon)
+
     return jsonify(weather_data)
 
 
