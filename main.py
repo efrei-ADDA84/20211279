@@ -1,18 +1,28 @@
-from flask import Flask, jsonify
-import config
+from flask import Flask, jsonify, request
 import requests
+import os
 
 app = Flask(__name__)
 
+API_KEY = os.environ.get("API_KEY")
+LAT = os.environ.get("LAT")
+LONG = os.environ.get("LONG")
 
-@app.route("/weather")
+
+@app.route("/")
 def get_current_weather():
-    lat = config.LAT
-    lon = config.LONG
-    api_key = config.API_KEY
-    weather_data = get_weather(api_key, lat, lon)
+    lat = request.args.get("lat", default=None, type=float)
+    lon = request.args.get("lon", default=None, type=float)
 
-    return jsonify(weather_data)
+    if lat is None or lon is None:
+        return "Error: missing 'lat' or 'lon' parameter"
+
+    weather_data = get_weather(API_KEY, lat, lon)
+
+    if "error" in weather_data:
+        return weather_data, 500
+    else:
+        return jsonify(weather_data)
 
 
 def get_weather(api_key, lat, lon):
@@ -38,4 +48,4 @@ def get_weather(api_key, lat, lon):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=8081)
