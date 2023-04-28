@@ -1,5 +1,9 @@
-import config
 import requests
+import os
+
+API_KEY = os.environ.get("API_KEY")
+LAT = os.environ.get("LAT")
+LONG = os.environ.get("LONG")
 
 
 def get_weather(api_key, lat, lon):
@@ -19,5 +23,5 @@ def get_weather(api_key, lat, lon):
 
 
 if __name__ == "__main__":
-    print("your params are :", config.API_KEY, config.LAT, config.LONG)
-    print(get_weather(config.API_KEY, config.LAT, config.LONG))
+    print("your params are :", API_KEY, LAT, LONG)
+    print(get_weather(API_KEY, LAT, LONG))
