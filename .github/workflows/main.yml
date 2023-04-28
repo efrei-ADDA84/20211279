@@ -18,4 +18,4 @@ jobs:
           context: .
           push: true
           tags: zacharyakakpo/20211279:latest
-          allow: dockerhub
+          allow: --allow=remote=docker.io
