@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import requests
 import os
 
+
 app = Flask(__name__)
 
 API_KEY = os.environ.get("API_KEY")
