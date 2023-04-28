@@ -5,8 +5,6 @@ import os
 app = Flask(__name__)
 
 API_KEY = os.environ.get("API_KEY")
-LAT = os.environ.get("LAT")
-LONG = os.environ.get("LONG")
 
 
 @app.route("/")
@@ -43,7 +41,7 @@ def get_weather(api_key, lat, lon):
         return weather_data
     else:
         return {
-            "error": f"Error retrieving weather data , {response.status_code}-{response.reason}"
+            "error": f"Error retrieving weather data , {response.status_code} - {response.reason}"
         }
 
 
