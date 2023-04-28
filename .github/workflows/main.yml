@@ -1,24 +1,4 @@
-name: learn-github-actions
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Build and test
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: false
-          tags: latest
-          file: ./Dockerfilename: Docker Publish
+name: github-action
 
 on:
   push:
