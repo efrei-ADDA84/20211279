@@ -41,4 +41,6 @@ You can also buil a docker image by follow this step :
 
 * Additionally, I had difficulties adding my Docker username and password to the secrets or accessing them from the workflow.
 
-* Lastly,i had trouble with port forwarding when using the docker run command. Specifically, I encountered an issue while trying to use the command docker run --network host --env API_KEY=**** 20211279 because I was working on Windows. To resolve this issue, I used the command docker run -p 8081:8081 --env API_KEY=*** 20211279 instead. This allowed me to forward port 8081 on my local machine to port 8081 in the Docker container. As a result, I was able to access my Flask app running in the Docker container at http://localhost:8081.
+* I had trouble with port forwarding when using the docker run command. Specifically, I encountered an issue while trying to use the command docker run --network host --env API_KEY=**** 20211279 because I was working on Windows. To resolve this issue, I used the command docker run -p 8081:8081 --env API_KEY=*** 20211279 instead. This allowed me to forward port 8081 on my local machine to port 8081 in the Docker container. As a result, I was able to access my Flask app running in the Docker container at http://localhost:8081.
+
+* I encountered an issue while adding Hadolint to my GitHub workflow. After adding Hadolint, my workflow was broken due to an issue with my Dockerfile. To fix the problem, I changed my "RUN" command in the Dockerfile to be: "RUN pip install --no-cache-dir -r requirements.txt".
