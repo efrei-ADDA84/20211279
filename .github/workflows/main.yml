@@ -7,14 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Docker Build and Push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: zacharyakakpo/20211279:latest
+        run: |
+          docker run --rm --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
+          docker buildx build --platform linux/amd64,linux/arm64 -t your-dockerhub-username/your-image-name:latest . --push
