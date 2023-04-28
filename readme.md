@@ -6,24 +6,19 @@ requests module
 
 #__Installation__ :
 Clone the repository.
-Install the requests module by running  : pip install requests.
+Install the requirements.txt
 
 #__Usage__:
 
 * Obtain an API key from OpenWeatherMap.
 
-* Edit the config.py file with your API key, latitude, and longitude values.
-
 * Run the main.py script to retrieve the current weather data. by running  : python main.py
-
+* Make request to the api
 
 #__Configuration__:
 The config.py file contains the following variables:
 
 * API_KEY: Your OpenWeatherMap API key.
-* LAT: The latitude of the location you want to retrieve weather data for.
-* LONG: The longitude of the location you want to retrieve weather data for.
-Example
 
 
 #__Dockerfile__:
@@ -34,10 +29,16 @@ You can also buil a docker image by follow this step :
 * go to a terminal
 * git clone https://github.com/efrei-ADDA84/20211279.git
 * docker build -t 20211279 -f ./Dockerfile . 
-*  docker run --env LAT=\<Lat>--env LONG=\<long> --env API_KEY=\<yourapikey>
+* docker run -p 8081:8081 --env API_KEY=*** 20211279
+* go to another terminal
+* curl "http://localhost:8081/?lat=5.902785&lon=102.754175"
 
 #__difficulty__ :  
 
-We faced obstacles in obtaining an API key necessary for our project. This difficulty slowed down our progress and required additional research to find an adequate solution. Solution : Wait for the creation of the Apikey.
+* I encountered errors while running the workflow, such as issues with Docker image building or publishing to Docker Hub. These errors could have been caused by a misconfiguration in the YAML file, syntax errors, or other issues.
 
-During the process of creating the Docker image, we encountered a minor blockage that delayed the project delivery. We had to investigate and resolve this technical problem to ensure the proper functioning of our application.
+* I also had authorization problems while trying to connect to Docker Hub or running certain Docker commands, possibly due to insufficient permissions.
+
+* Additionally, I had difficulties adding my Docker username and password to the secrets or accessing them from the workflow.
+
+* Lastly,i had trouble with port forwarding when using the docker run command. Specifically, I encountered an issue while trying to use the command docker run --network host --env API_KEY=**** 20211279 because I was working on Windows. To resolve this issue, I used the command docker run -p 8081:8081 --env API_KEY=*** 20211279 instead. This allowed me to forward port 8081 on my local machine to port 8081 in the Docker container. As a result, I was able to access my Flask app running in the Docker container at http://localhost:8081.
