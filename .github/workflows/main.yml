@@ -12,16 +12,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Build et Push Docker image
+      if: steps.hadolint.outcome == 'success'
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: your-dockerhub-username/your-image-name:latest
+
       - name: Lint Dockerfile with Hadolint
         uses: hadolint/hadolint@v2.7.0
         with:
           files: Dockerfile
         id: hadolint
 
-      - name: Build et Push Docker image
-        if: steps.hadolint.outcome == 'success'
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: your-dockerhub-username/your-image-name:latest
+      
