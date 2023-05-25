@@ -43,7 +43,7 @@ jobs:
         resource-group: ${{ secrets.RESOURCE_GROUP }}
         name: 20211279
         image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/efreidevops.azurecr.io/20211279:v1:latest
-        dns-name-label: efreidevops.azurecr.io
+        dns-name-label: devops-20211279
         location: france central
         registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         registry-username: ${{ secrets.REGISTRY_USERNAME }}
