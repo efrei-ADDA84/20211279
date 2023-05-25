@@ -40,7 +40,7 @@ jobs:
     - name: Deploy to ACI
       uses: azure/aci-deploy@v1
       with:
-        resource_group: ${{ secrets.RESOURCE_GROUP }}
+        resource-group: ${{ secrets.RESOURCE_GROUP }}
         name: ACI_Zach
         image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/acr_repo_zach:latest
         dns_name_label: devops
