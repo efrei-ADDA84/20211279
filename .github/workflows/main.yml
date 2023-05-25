@@ -31,23 +31,20 @@ jobs:
         az acr login --name ${{ secrets.REGISTRY_LOGIN_SERVER }}
 
     - name: Build the Docker image
-      run: docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/efreidevops.azurecr.io/20211279:v1:latest
+      run: docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/20211279:v1
 
     - name: Push the Docker image to ACR
       run: |
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/efreidevops.azurecr.io/20211279:v1:latest
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/20211279:v1
 
     - name: Deploy to ACI
       uses: azure/aci-deploy@v1
       with:
         resource-group: ${{ secrets.RESOURCE_GROUP }}
         name: 20211279
-        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/efreidevops.azurecr.io/20211279:v1:latest
+        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20211279:v1
         dns-name-label: devops-20211279
         location: france central
-        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - name: Logout of Azure
       run: |
