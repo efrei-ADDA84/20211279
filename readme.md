@@ -1,46 +1,57 @@
-This code retrieves current weather data for a given latitude and longitude using the OpenWeatherMap API.
+# Projet de Prédiction Météo
 
-#__Requirements__ :
-Python 3.6 or higher
-requests module
+Ce projet contient une application Flask qui interagit avec l'API OpenWeatherMap pour obtenir les données météorologiques actuelles pour un emplacement spécifique.
 
-#__Installation__ :
-Clone the repository.
-Install the requirements.txt
+# Fonctionnalités
+API qui accepte des coordonnées de latitude et de longitude en entrée
+Interagit avec l'API OpenWeatherMap pour récupérer les données météorologiques
+Retourne une réponse JSON avec une description de la météo, la température actuelle, la sensation thermique et l'humidité.
+# Comment utiliser
+Effectuez une requête GET à l'URL suivante :
+http://devops-20211279.francecentral.azurecontainer.io:8081/?lat=5&lon=105
 
-#__Usage__:
+Remplacez <your-deployed-api-url>, <latitude> et <longitude> par les valeurs correspondantes.
 
-* Obtain an API key from OpenWeatherMap.
+## Installation en local
+Clonez ce repository :
+git clone https://github.com/efrei-ADDA84/20211279.git
 
-* Run the main.py script to retrieve the current weather data. by running  : python main.py
-* Make request to the api
+## Construisez l'image Docker :
+docker build -t <your-image-name> .
 
-#__Configuration__:
-The config.py file contains the following variables:
+## Exécutez le conteneur Docker :
+docker run -e API_KEY=<your-openweathermap-api-key> -p 8081:8081 <your-image-name>
 
-* API_KEY: Your OpenWeatherMap API key.
+L'application sera accessible à http://localhost:8081
 
+Remarque : remplacez <your-github-username>, <your-repo>, <your-image-name> et <your-openweathermap-api-key> par les valeurs correspondantes.
 
-#__Dockerfile__:
-You can also buil a docker image by follow this step :
+# Technologies utilisées
+Flask : Framework web pour le développement de l'API.
+Docker : Conteneurisation de l'application pour une portabilité accrue.
+OpenWeatherMap API : API tierce pour obtenir des données météorologiques.
+Déploiement
 
-* install docker
-* install git
-* go to a terminal
-* git clone https://github.com/efrei-ADDA84/20211279.git
-* docker build -t 20211279 -f ./Dockerfile . 
-* docker run -p 8081:8081 --env API_KEY=*** 20211279
-* go to another terminal
-* curl "http://localhost:8081/?lat=5.902785&lon=102.754175"
+# Azure Container
 
-#__difficulty__ :  
+Ce projet est déployé sur Azure Container Instance avec l'utilisation de GitHub Actions pour le CI/CD.
 
-* I encountered errors while running the workflow, such as issues with Docker image building or publishing to Docker Hub. These errors could have been caused by a misconfiguration in the YAML file, syntax errors, or other issues.
+Déployer mon projet sur Azure Container Instance (ACI) m'offre plusieurs avantages :
 
-* I also had authorization problems while trying to connect to Docker Hub or running certain Docker commands, possibly due to insufficient permissions.
+Facilité d'utilisation : ACI est conçu pour être simple et facile à utiliser. Je peux déployer un conteneur sans avoir à gérer l'infrastructure sous-jacente.
 
-* Additionally, I had difficulties adding my Docker username and password to the secrets or accessing them from the workflow.
+Rapidité : ACI est rapide. Je peux déployer un conteneur en quelques secondes, ce qui est beaucoup plus rapide que la plupart des autres services de conteneur.
 
-* I had trouble with port forwarding when using the docker run command. Specifically, I encountered an issue while trying to use the command docker run --network host --env API_KEY=**** 20211279 because I was working on Windows. To resolve this issue, I used the command docker run -p 8081:8081 --env API_KEY=*** 20211279 instead. This allowed me to forward port 8081 on my local machine to port 8081 in the Docker container. As a result, I was able to access my Flask app running in the Docker container at http://localhost:8081.
+Scalabilité : Avec ACI, je peux facilement augmenter ou diminuer le nombre de conteneurs en fonction de mes besoins. Cela rend ACI idéal pour les applications avec des charges de travail variables.
 
-* I encountered an issue while adding Hadolint to my GitHub workflow. After adding Hadolint, my workflow was broken due to an issue with my Dockerfile. To fix the problem, I changed my "RUN" command in the Dockerfile to be: "RUN pip install --no-cache-dir -r requirements.txt".
+Tarification à l'utilisation : Avec ACI, je ne paye que pour ce que j'utilise. Cela signifie que je n'ai pas à payer pour des ressources inutilisées, ce qui peut me faire économiser de l'argent.
+
+Intégration avec d'autres services Azure : ACI s'intègre facilement avec d'autres services Azure, tels que Azure Logic Apps, Azure Functions et Azure Kubernetes Service. Cela me donne une plus grande flexibilité pour créer des solutions personnalisées.
+
+Sécurité : Azure offre de nombreuses fonctionnalités de sécurité, y compris le chiffrement au repos et en transit, les réseaux virtuels pour isoler mes conteneurs, et Azure Policy pour assurer la conformité.
+
+Gestion des secrets : ACI s'intègre avec Azure Key Vault, ce qui me permet de gérer de manière sécurisée les secrets utilisés par mes conteneurs.
+
+Compatibilité : Comme ACI peut exécuter n'importe quel conteneur compatible avec Docker, j'ai une grande liberté pour choisir les technologies à utiliser dans mon application.
+
+En somme, Azure Container Instance est une excellente option si je souhaite déployer des conteneurs rapidement et facilement, sans avoir à me soucier de la gestion de l'infrastructure sous-jacente.
